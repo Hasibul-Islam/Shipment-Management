@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <!-- Icon Cards-->
+   
+   <div class="row">
+    <div class="col-xl-12 col-sm-12 mb-12">
+      <div class="card card-warning">
+        <div class="card-header">
+          <h3 class="card-title">Product Information</h3>
+        </div>
+        <!-- /.card-header -->
+        
+        <div class="card-body">
+          <form method = "post" role="form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label >Product Name</label>
+                  {{form.product_name}}
+                  {{form.product_name.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Gender</label>
+                  {{form.gender}}
+                  {{form.gender.errors}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Inches Height</label>
+                  {{form.inches_height}}
+                  {{form.inches_height.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Inches Width</label>
+                  {{form.inches_width}}
+                  {{form.inches_width.errors}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>GSM</label>
+                  {{form.gsm}}
+                  {{form.gsm.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Fabric Description </label>
+                  {{form.fabric_description}}
+                  {{form.fabric_description.errors}}
+                </div>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Other Description</label>
+                  {{form.other_descriptions}}
+                  {{form.other_descriptions.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Quantity</label>
+                  {{form.quantity}}
+                  {{form.quantity.errors}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Colour Description </label>
+                      {{form.color_description}}
+                      {{form.color_description.errors}}
+                    </div>
+                  </div>
+              <div class="col-sm-6">
+                
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Unit Price</label>
+                  {{form.unit_price}}
+                  {{form.unit_price.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Order Details</label>
+                  {{form.order_details}}
+                  {{form.order_details.errors}}
+                </div>
+              </div>
+            </div>
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+          {% endfor %}
+              
+            </div> 
+            <button type="submit" class="btn btn-primary">Submit</button>   
+             
+          </form>
+          <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-default">Cancel</a> 
+        </div>
+        
+        <!-- /.card-body -->
+      </div>
+        <div class="card-body">
+          <div class="card-body-icon">
+          </div>
+          
+      </div>
+      
+    </div>
+    
+  </div>
+  
+{% endblock %}

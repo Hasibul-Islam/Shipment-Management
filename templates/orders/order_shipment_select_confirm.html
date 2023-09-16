@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add CNF Details</h2>
+  <hr>
+  <p>Are you sure you want to add the following CNF details to this order?</p>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Company</th>
+        <td>{{ order.company }}</td>
+      </tr>
+      <tr>
+        <th>Order No</th>
+        <td>{{order.order_no}}</td>
+      </tr>
+      <tr>
+        <th>Order Date</th>
+        <td>{{ order.order_date }}</td>
+      </tr>
+      <tr>
+        <th>Order Delivery Status </th>
+        <td>{{ order.order_delivery_status}}</td>
+      </tr>
+      <tr>
+        <th>Delivered On</th>
+        <td>{{ order.delivered_on }}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Update">
+    <a href="{% url 'order_list' %}" class="btn btn-default">Cancel</a>
+  </form>
+{% endblock %}

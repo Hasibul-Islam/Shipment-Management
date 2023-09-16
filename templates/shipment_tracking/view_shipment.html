@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load auth_extras %}
+
+<div id="content-wrapper">
+
+    <div class="container-fluid">
+
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        
+        <li class="breadcrumb-item ">Shipments</li>
+        <li class="breadcrumb-item active">Shipment Tracking</li>
+      </ol>
+
+      <div class="row">
+        <div class="col-xl-12 col-sm-12 mb-12">
+          <div class="card card-warning">
+            <div class="card-header">
+              <h3 class="card-title">Shipment's Tracking</h3>
+              <h7 class="card-title">Shipment ID: {{shipment_tracking.shipment_no}}</h7>
+            </div>
+            <!-- /.card-header -->
+            <div class="container">
+              {% if shipment_tracking.order_received %}
+              <div class="step ">
+                <div class="product-id">Received</div>
+                <div class="product-id">{{shipment_tracking.order_received_date}}</div>
+                
+            </div>
+            {% else %}
+            <div class="step ">
+                <div class="step-icon">Pending</div>
+                <div class="step-icon"></div>
+                
+            </div>
+            
+            {% endif%}
+            
+            {% if shipment_tracking.ready %}
+            <div class="step">
+                <div class="product-id">Ready</div>
+                <div class="product-id">{{shipment_tracking.order_ready_date}}</div>
+            </div>
+            {% else %}
+            <div class="step ">
+                <div class="step-icon">Pending</div>
+                <div class="step-icon"></div>
+                
+            </div>
+            
+            {% endif%}
+            {% if shipment_tracking.shipped %}
+            <div class="step">
+                <div class="product-id">Shipped</div>
+                <div class="product-id">{{shipment_tracking.order_shipped_date}}</div>
+            </div>
+            {% else %}
+            <div class="step ">
+                <div class="step-icon">Pending</div>
+                <div class="step-icon"></div>
+                
+            </div>
+            
+            {% endif%}
+            {% if shipment_tracking.reached_overseas %}
+            <div class="step">
+                <div class="product-id">Reached Overseas</div>
+                <div class="product-id">{{shipment_tracking.order_reached_overseas_date}}</div>
+            </div>
+            {% else %}
+            <div class="step ">
+                <div class="step-icon">Pending</div>
+                <div class="step-icon"></div>
+                
+            </div>
+            
+            {% endif%}
+            {% if shipment_tracking.order_delivered %}
+            <div class="step">
+                <div class="product-id">Order Devlivered</div>
+                <div class="product-id">{{shipment_tracking.order_delivered_date}}</div>
+            </div>
+            {% else %}
+            <div class="step ">
+                <div class="step-icon">Pending</div>
+                <div class="step-icon"></div>
+                
+            </div>
+            
+            {% endif%}
+            {% if shipment_tracking.payment_lc %}
+            <div class="step">
+                <div class="product-id">LC Approved</div>
+                <div class="product-id">{{shipment_tracking.order_payment_lc_date}}</div>
+            </div>
+            {% else %}
+            <div class="step ">
+                <div class="step-icon">Pending</div>
+                <div class="step-icon"></div>
+                
+            </div>
+            
+            {% endif%}
+            
+          </div>
+          <div class="card-body">
+              <div class="card-body-icon">
+              </div>
+          </div>
+        </div>
+      </div>
+      
+        
+        <div class="card-body">
+            <form method = "post" role="form">
+              {% csrf_token %}
+              <input type="hidden" class="form-control" id="update" name="update" value="Got it!">
+              {% if not shipment_tracking.reached_overseas and request.user|has_group:"CNF"%}
+              <a href="{% url 'shipment_confirm_update_cnf' shipment_tracking.pk %}" class="btn btn-info">Update</a>
+              
+              {% endif %}
+              {% if shipment_tracking.reached_overseas and not shipment_tracking.payment_lc and request.user|has_group:"Admin"%}
+              
+              <input type="submit" class="btn btn-info" value="Send Email to Buyer">
+              {% endif%}
+              
+            </form>
+            </div>
+        
+
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright © Neha Ahmed 2023</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+{% endblock %}

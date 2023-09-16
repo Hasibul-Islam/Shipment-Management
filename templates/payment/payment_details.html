@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Icon Cards-->
+
+<div id="printable-div">
+ 
+  <!-- Icon Cards-->
+  
+  
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  .row {
+    margin-left:-5px;
+    margin-right:-5px;
+  }
+    
+  .column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  
+  </style>
+  
+  </head>
+  <script type="text/javascript">
+    function PrintElem(elem){
+      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+      var css = "";
+      var myStylesLocation = "${pageContext.request.contextPath}/ui/css/bootstrap.min.css";
+
+      $.ajax({
+          url: myStylesLocation,
+          type: "POST",
+          async: false
+      }).done(function(data){
+          css += data;
+      }) 
+
+      mywindow.document.write('<html><head><title></title>');
+      mywindow.document.write('<style type="text/css">'+css+' </style>');
+      mywindow.document.write('<link rel="stylesheet" href="${pageContext.request.contextPath}/ui/css/bootstrap.min.css" type="text/css" media="print"/>');
+      mywindow.document.write('</head><body >');
+      mywindow.document.write('<h1>' + document.title  + '</h1>');
+      mywindow.document.write(document.getElementById(elem).innerHTML);
+      mywindow.document.write('</body></html>');
+      mywindow.document.close(); // necessary for IE >= 10
+      mywindow.focus(); // necessary for IE >= 10*/
+
+      mywindow.print(); 
+      setTimeout(function(){window.close();}, 10000);
+      mywindow.close();
+      
+
+      return true;
+  }
+    </script>
+  <div id="printableArea">
+  <h2>Payment Details</h2>
+    <ul>Order No: {{payment.order_no}}</ul>
+    <ul>Invoice No: {{payment.invoice_no}}</ul>
+    <ul>Paid Date: {{payment.paid_date}}</ul>
+    <ul>Total Price:{{payment.total_price}}</ul>
+  <p>Products</p>
+ 
+  <div class="row">
+    {% for product in products %}
+    {% if forloop.counter|divisibleby:2 %}
+    <div class="column">
+      
+      <table>
+        <tr>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td>{{ product.id}}</td>
+          <td>{{ product.product_name}}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.unit_price}}</td>
+        </tr>
+      </table>
+      
+    </div>
+    {% else %}
+    <div class="column">
+      
+      <table>
+        <tr>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td>{{ product.id}}</td>
+          <td>{{ product.product_name}}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.unit_price}}</td>
+        </tr>
+      </table>
+      
+    </div>
+    {% endif %}
+    {% endfor %}
+    
+  </div>
+</div>
+  
+  
+  
+</div>  
+  <button onclick="PrintElem('printableArea')" id="printButton" class="btn btn-info">Print</button>
+<br>
+<br>
+<a href="{% url 'payment_list' %}" class="btn btn-info">Back to List</a>  
+{% endblock %}
+    
+
+

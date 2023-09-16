@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Icon Cards-->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="section">
+          <h2>Customer Information</h2>
+          <div class="contact-row">
+            <div class="contact-label">Customer No:</div>
+            <div class="contact-value">{{company_details.customer_no}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Contact Person:</div>
+            <div class="contact-value">{{company_details.contact_person}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Customer Company:</div>
+            <div class="contact-value">{{company_details.customer_company}}</div>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Address Information</h2>
+          <div class="contact-row">
+            <div class="contact-label">Street:</div>
+            <div class="contact-value">{{company_details.street}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">City:</div>
+            <div class="contact-value">{{company_details.city}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Postal Code:</div>
+            <div class="contact-value">{{company_details.postal_code}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">State:</div>
+            <div class="contact-value">{{company_details.state}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Country:</div>
+            <div class="contact-value">{{company_details.country}}</div>
+          </div>
+          <div class="section">
+            <h2>Contact Information</h2>
+            <div class="contact-row">
+              <div class="contact-label">Email:</div>
+              <div class="contact-value">{{company_details.email}}</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Phone:</div>
+              <div class="contact-value">{{company_details.phone}}</div>
+            </div>
+            <div class="contact-row">
+                <div class="contact-label">Best Time to Call:</div>
+                <div class="contact-value">{{company_details.best_time_to_call}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <a href="{% url 'company_details_list' %}" class="btn btn-info">Back to List</a>
+{% endblock %}

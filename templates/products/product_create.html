@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+   <!-- Icon Cards-->
+   
+   <div class="row">
+    <div class="col-xl-12 col-sm-12 mb-12">
+      <div class="card card-warning">
+        <div class="card-header">
+          <h3 class="card-title">Product Information</h3>
+        </div>
+        <!-- /.card-header -->
+        
+        <div class="card-body">
+          <form method = "post" role="form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  
+                  {{form.product_name|as_crispy_field}}
+                  {{form.product_name.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  
+                  {{form.gender|as_crispy_field}}
+                  {{form.gender.errors}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  
+                  {{form.size_chart|as_crispy_field}}
+                  {{form.size_chart.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  
+                  {{form.color_chart|as_crispy_field}}
+                  {{form.color_chart.errors}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              
+              <div class="col-sm-6">
+                <div class="form-group">
+                  
+                  {{form.fabric_description|as_crispy_field}}
+                  {{form.fabric_description.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  
+                  {{form.other_descriptions|as_crispy_field}}
+                  {{form.other_descriptions.errors}}
+                </div>
+              </div>
+              
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      
+                      {{form.region_chart|as_crispy_field}}
+                      {{form.region_chart.errors}}
+                    </div>
+                  </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  
+                  {{form.quantity|as_crispy_field}}
+                  {{form.quantity.errors}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                
+              <div class="col-sm-6">
+                
+                <!-- text input -->
+                <div class="form-group">
+                  
+                  {{form.unit_price|as_crispy_field}}
+                  {{form.unit_price.errors}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                
+            </div>
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field.errors }}
+            {{ hidden_field }}
+          {% endfor %}
+              
+            </div> 
+            <button type="submit" class="btn btn-primary">Submit</button>   
+            <a href="{% url 'order_list' %}" class="btn btn-default">Cancel</a>  
+          </form>
+          
+        </div>
+        
+        <!-- /.card-body -->
+      </div>
+        <div class="card-body">
+          <div class="card-body-icon">
+          </div>
+          
+      </div>
+      
+    </div>
+    
+  </div>
+  
+{% endblock %}

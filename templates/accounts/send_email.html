@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Icon Cards-->
+  <div class="row">
+    <div class="col-xl-12 col-sm-12 mb-12">
+      <div class="card card-warning">
+        <div class="card-header">
+          <h3 class="card-title">Compose Email</h3>
+        </div>
+ <div class="card-body">
+  <form method="post">
+    {% csrf_token%}
+    <div class="form-group">
+      <label for="to">To:</label>
+      <input type="email" class="form-control" id="to" placeholder="Enter email address" name="to_email">
+    </div>
+    
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input type="text" class="form-control" id="subject" placeholder="Enter email subject" name="subject">
+    </div>
+    <div class="form-group">
+      <label for="body">Message:</label>
+      <textarea class="form-control" id="body" rows="5" name="message"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+  </form>
+  
+    </div>
+        <!-- /.card-body -->
+      </div>
+        <div class="card-body">
+          <div class="card-body-icon">
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

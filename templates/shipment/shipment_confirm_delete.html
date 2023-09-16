@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Delete Company Details</h2>
+  <hr>
+  <p>Are you sure you want to delete the following company details?</p>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Shipment Info</th>
+        <td>{{ shipment.cnf_information }}</td>
+      </tr>
+      <tr>
+        <th>Shipment No</th>
+        <td>{{ shipment.cnf_no }}</td>
+      </tr>
+      <tr>
+        <th>Order No </th>
+        <td>{{ shipment.order_no }}</td>
+      </tr>
+      <tr>
+        <th>Contact Person:</th>
+        <td>{{ shipment.contact_person }}</td>
+      </tr>
+      
+      <tr>
+        <th>City:</th>
+        <td>{{ shipment.city }}</td>
+      </tr>
+      <tr>
+        <th>Country:</th>
+        <td>{{ shipment.country }}</td>
+      </tr>
+      <tr>
+        <th>State:</th>
+        <td>{{ shipment.state }}</td>
+      </tr>
+      <tr>
+        <th>Street:</th>
+        <td>{{ shipment.street }}</td>
+      </tr>
+      <tr>
+        <th>Postal Code:</th>
+        <td>{{ shipment.postal_code }}</td>
+      </tr>
+      <tr>
+        <th>Email:</th>
+        <td>{{ shipment.email }}</td>
+      </tr>
+      <tr>
+        <th>Phone:</th>
+        <td>{{ shipment.phone }}</td>
+      </tr>
+      <tr>
+        <th>Best Time to Call:</th>
+        <td>{{ shipment.best_time_to_call }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete">
+    <a href="{% url 'shipment_list' %}" class="btn btn-default">Cancel</a>
+  </form>
+{% endblock %}

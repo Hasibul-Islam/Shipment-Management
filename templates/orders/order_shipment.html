@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Company Details</h2>
+  <hr>
+  
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Company</th>
+        <td>{{ order.company }}</td>
+      </tr>
+      <tr>
+        <th>Order No</th>
+        <td>{{order.order_no}}</td>
+      </tr>
+      <tr>
+        <th>Order Date</th>
+        <td>{{ order.order_date }}</td>
+      </tr>
+      <tr>
+        <th>Order Delivery Status </th>
+        <td>{{ order.order_delivery_status}}</td>
+      </tr>
+      <tr>
+        <th>Delivered On</th>
+        <td>{{ order.delivered_on }}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <div class="row">
+  
+    <div class="col-xl-12 col-sm-12 mb-12">
+      
+      
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+        CNF List</div>
+          <div class="card mb-3">
+            <div >
+              
+  
+              </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>CNF Information</th>
+                  <th>CNF No</th>
+                  <th>Order No</th>
+                  <th>Contact Person</th>
+                  <th>City</th>
+                  <th>Country</th>
+                  <th>State</th>
+                  <th>Street</th>
+                  <th>Postal Code</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Best Time to Call</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                {% for shipment in shipments %}
+                <tr>
+                  <td>{{ shipment.shipment_information }}</td>
+                  <td>{{ shipment.shipment_no }}</td>
+                  <td>{{ shipment.order_no }}</td>
+                  <td>{{ shipment.contact_person }}</td>
+                  <td>{{ shipment.city }}</td>
+                  <td>{{ shipment.country }}</td>
+                  <td>{{ shipment.state }}</td>
+                  <td>{{ shipment.street }}</td>
+                  <td>{{ shipment.postal_code }}</td>
+                  <td>{{ shipment.email }}</td>
+                  <td>{{ shipment.phone }}</td>
+                  <td>{{ shipment.best_time_to_call }}</td>
+                  <td>
+                    <div class="action-btns">
+                     
+                    <a href= "{% url 'select_cnf_confirm' order.pk shipment.pk %}"> <button class="btn-view"  type=button>Select CNF</button></a>
+  
+                    
+  
+                    
+                    
+                  </div>
+                </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="12">No CNF details available.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+        <div class="card-body">
+          
+          <div class="card-body-icon">
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

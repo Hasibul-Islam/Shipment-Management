@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Delete Company Details</h2>
+  <hr>
+  <p>Are you sure you want to delete the following product details?</p>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Product Name</th>
+        <td>{{ product.product_name }}</td>
+      </tr>
+      <tr>
+        <th>Gender</th>
+        <td>{{ product.gender }}</td>
+      </tr>
+      <tr>
+        <th>Inches Height</th>
+        <td>{{ product.inches_height }}</td>
+      </tr>
+      <tr>
+        <th>Inches Width</th>
+        <td>{{ product.inches_width }}</td>
+      </tr>
+      
+      <tr>
+        <th>Color Description</th>
+        <td>{{ product.color_description }}</td>
+      </tr>
+      <tr>
+        <th>GSM</th>
+        <td>{{ product.gsm }}</td>
+      </tr>
+      <tr>
+        <th>Fabric Description</th>
+        <td>{{ product.fabric_description }}</td>
+      </tr>
+      <tr>
+        <th>Order No</th>
+        <td>{{ product.order_no}}</td>
+      </tr>
+      <tr>
+        <th>Other Descriptions </th>
+        <td>{{ product.other_descriptions}}</td>
+      </tr>
+      <tr>
+        <th>Quantity</th>
+        <td>{{ product.quantity}}</td>
+      </tr>
+      <tr>
+        <th>Unit Price</th>
+        <td>{{ product.unit_price }}</td>
+      </tr>
+      <tr>
+        <th>Total Price</th>
+        <td>{{ product.total_price }}</td>
+      </tr>
+      <tr>
+        <th>Order Details</th>
+        <td>{{ product.order_details }}</td>
+      </tr>
+      <tr>
+        <th>Contact Person</th>
+        <td>{{ product.contact_person }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete">
+    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-default">Cancel</a>
+  </form>
+{% endblock %}

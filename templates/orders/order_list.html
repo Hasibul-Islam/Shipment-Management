@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Icon Cards-->
+
+  <!-- content to be printed -->
+
+
+<div class="row">
+  
+  <div class="col-xl-12 col-sm-12 mb-12">
+    
+    
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Order List</div>
+        <div class="card mb-3">
+          <div >
+            {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+            </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Customer No</th>
+                <th>Order No</th>
+                <th>Order Date</th>
+                <th>Order Delivery Status</th>
+                <th>CNF No</th>
+                <th>Delivered On</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for order in orders %}
+              <tr>
+                <td>{{ order.company }}</td>
+                <td>{{ order.order_no }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>{{ order.order_delivery_status }}</td>
+                <td>{{ order.cnf_no }}</td>
+                <td>{{ order.delivered_on }}</td>
+              
+                
+                <td>
+                  <div class="action-btns">
+                   
+                  <a href= "{% url 'order_detail' order.pk %}"> <button class="btn-view"  type=button>View</button></a>
+                  
+                  
+                  
+                  
+                  <a href="{% url 'order_delete' order.pk %}" ><button class="btn-delete" type=button>Delete</button></a>
+                  <a href="{% url 'product_create' order.pk %}" ><button class="btn btn-info" type=button>Add Product</button></a>
+                  <a href="{% url 'select_cnf' order.pk %}" ><button class="btn btn-info" type=button>Select CNF</button></a>
+
+                  <a href="{% url 'payment_create' order.pk %}" ><button class="btn btn-info" type=button>Add Payment</button></a>
+                  
+                </div>
+              </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="12">No company details available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+      <div class="card-body">
+        
+        <div class="card-body-icon">
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

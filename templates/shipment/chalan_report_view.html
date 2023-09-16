@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Icon Cards-->
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .row {
+      margin-left:-5px;
+      margin-right:-5px;
+    }
+      
+    .column {
+      float: left;
+      width: 50%;
+      padding: 5px;
+    }
+    
+    /* Clearfix (clear floats) */
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 16px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  
+    
+    </style>
+<div id="printableArea">
+  <h2> Chalan Report </h2>
+  <div class="container">
+    
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="section">
+          <h2>CNF Information</h2>
+          <div class="contact-row">
+            <div class="contact-label">CNF Information</div>
+            <div class="contact-value">{{cnf.cnf_information}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">CNF No </div>
+            <div class="contact-value">{{cnf.cnf_no}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Order No </div>
+            <div class="contact-value">{{shipment.order_no}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Contact Person</div>
+            <div class="contact-value">{{cnf.contact_person}}</div>
+          </div>
+        </div>
+        
+            <h2>Contact Information</h2>
+            <div class="contact-row">
+              <div class="contact-label">Email:</div>
+              <div class="contact-value">{{cnf.email}}</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Phone:</div>
+              <div class="contact-value">{{cnf.phone}}</div>
+            </div>
+            <div class="contact-row">
+                <div class="contact-label">Best Time to Call:</div>
+                <div class="contact-value">{{cnf.best_time_to_call}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="section">
+            <h2>Overseas Company Information </h2>
+            <div class="contact-row">
+              <div class="contact-label">Company</div>
+              <div class="contact-value">{{company.customer_company}}</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">City</div>
+              <div class="contact-value">{{company.city}}</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Country </div>
+              <div class="contact-value">{{company.country}}</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Contact Person</div>
+              <div class="contact-value">{{company.contact_person}}</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Street</div>
+              <div class="contact-value">{{company.street}}</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Postal Code</div>
+              <div class="contact-value">{{company.postal_code}}</div>
+            </div>
+          </div>
+          
+              <h2>Contact Information</h2>
+              <div class="contact-row">
+                <div class="contact-label">Email:</div>
+                <div class="contact-value">{{company.email}}</div>
+              </div>
+              <div class="contact-row">
+                <div class="contact-label">Phone:</div>
+                <div class="contact-value">{{company.phone}}</div>
+              </div>
+              <div class="contact-row">
+                  <div class="contact-label">Best Time to Call:</div>
+                  <div class="contact-value">{{company.best_time_to_call}}</div>
+              </div>
+              <h2>Payment Information</h2>
+              <div class="contact-row">
+                <div class="contact-label">Invoice No:</div>
+                <div class="contact-value">{{payment.invoice_no}}</div>
+              </div>
+          </div>
+      </div>
+</div>
+
+
+
+
+
+ 
+  <div class="row" >
+    {% for product in products %}
+    {% if forloop.counter|divisibleby:2 %}
+    <div class="column">
+      
+      <table>
+        <tr>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td>{{ product.id}}</td>
+          <td>{{ product.product_name}}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.unit_price}}</td>
+        </tr>
+      </table>
+      
+    </div>
+    {% else %}
+    <div class="column">
+      
+      <table>
+        <tr>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          
+        </tr>
+        <tr>
+          <td>{{ product.id}}</td>
+          <td>{{ product.product_name}}</td>
+          <td>{{ product.quantity }}</td>
+          
+        </tr>
+      </table>
+      
+    </div>
+    {% endif %}
+    {% endfor %}
+    
+  </div>
+  <p> </p>
+
+  <a href="{% url 'shipment_report_list' %} " class="btn btn-info">Back to List</a>
+  <p> </p>
+  <button onclick="PrintElem('printableArea')" id="printButton" class="btn btn-info">Print</button>
+</div>
+</div>
+
+
+<script type="text/javascript">
+    function PrintElem(elem){
+      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+      var css = "";
+      var myStylesLocation = "${pageContext.request.contextPath}/ui/css/bootstrap.min.css";
+
+      $.ajax({
+          url: myStylesLocation,
+          type: "POST",
+          async: false
+      }).done(function(data){
+          css += data;
+      }) 
+
+      mywindow.document.write('<html><head><title></title>');
+      mywindow.document.write('<style type="text/css">'+css+' </style>');
+      mywindow.document.write('<link rel="stylesheet" href="${pageContext.request.contextPath}/ui/css/bootstrap.min.css" type="text/css" media="print"/>');
+      mywindow.document.write('</head><body >');
+      mywindow.document.write('<h1>' + document.title  + '</h1>');
+      mywindow.document.write(document.getElementById(elem).innerHTML);
+      mywindow.document.write('</body></html>');
+      mywindow.document.close(); // necessary for IE >= 10
+      mywindow.focus(); // necessary for IE >= 10*/
+
+      mywindow.print(); 
+      setTimeout(function(){window.close();}, 10000);
+      mywindow.close();
+      
+
+      return true;
+  }
+    </script>
+    
+  
+{% endblock %}
+
+

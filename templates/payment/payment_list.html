@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Icon Cards-->
+
+<div class="row">
+  
+  <div class="col-xl-12 col-sm-12 mb-12">
+    
+    
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Payment List</div>
+        <div class="card mb-3">
+          <div >
+            
+
+            </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                
+                <th>Order No</th>
+                <th>Invoice No</th>
+                <th>Total Price</th>
+                <th>Payment Status</th>
+                <th>Paid Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for payment in payments %}
+              <tr>
+                <td>{{ payment.order_no }}</td>
+                <td>{{ payment.invoice_no }}</td>
+                <td>{{ payment.total_price }}</td>
+                <td>{{ payment.payment_status }}</td>
+                <td>{{ payment.paid_date }}</td>
+              
+                
+                <td>
+                  <div class="action-btns">
+                   
+                  <a href= "{% url 'view_payment' payment.pk %}"> <button class="btn-view"  type=button>View</button></a>
+                  
+                  <a href="{% url 'payment_update' payment.pk %}"> <button class="btn-edit" type=button>Edit</button></a>
+                  
+                  
+                  <a href="{% url 'payment_delete' payment.pk %}" ><button class="btn-delete" type=button>Delete</button></a>
+                  
+                  
+                  
+                </div>
+              </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="12">No company details available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+      <div class="card-body">
+        
+        <div class="card-body-icon">
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

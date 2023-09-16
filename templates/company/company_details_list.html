@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Icon Cards-->
+
+<div class="row">
+  
+  <div class="col-xl-12 col-sm-12 mb-12">
+    
+    
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Company List</div>
+        <div class="card mb-3">
+          <div >
+            <form method="POST" action="{% url 'create_company_details' %}">
+              {% csrf_token %}
+            <button class="btn-view">Add Company</button>
+
+            </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Customer No</th>
+                <th>Contact Person</th>
+                <th>Customer Company</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>Street</th>
+                <th>Postal Code</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Best Time to Call</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for company_details in company_details %}
+              <tr>
+                <td>{{ company_details.customer_no }}</td>
+                <td>{{ company_details.contact_person }}</td>
+                <td>{{ company_details.customer_company }}</td>
+                <td>{{ company_details.city }}</td>
+                <td>{{ company_details.country }}</td>
+                <td>{{ company_details.state }}</td>
+                <td>{{ company_details.street }}</td>
+                <td>{{ company_details.postal_code }}</td>
+                <td>{{ company_details.email }}</td>
+                <td>{{ company_details.phone }}</td>
+                <td>{{ company_details.best_time_to_call }}</td>
+                <td>
+                  <div class="action-btns">
+                   
+                  <a href= "{% url 'company_details_detail' company_details.pk %}"> <button class="btn-view"  type=button>View</button></a>
+                  
+                  <a href="{% url 'update_company_details' company_details.pk %}"> <button class="btn-edit" type=button>Edit</button></a>
+                  
+                  
+                  
+
+                  <a href="{% url 'order_create' company_details.pk %}" ><button class="btn btn-info" type=button>Add Order</button></a>
+                  
+                </div>
+              </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="12">No company details available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+      <div class="card-body">
+        
+        <div class="card-body-icon">
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

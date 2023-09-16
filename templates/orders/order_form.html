@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <!-- Icon Cards-->
+   
+   <div class="row">
+    <div class="col-xl-12 col-sm-12 mb-12">
+      <div class="card card-warning">
+        <div class="card-header">
+          <h3 class="card-title">Company's Information</h3>
+        </div>
+        <!-- /.card-header -->
+        
+        <div class="card-body">
+          <form method = "post" role="form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label >Order Date</label>
+                  {{form.order_date}}
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>   
+            <a href="{% url 'company_details_list' %}" class="btn btn-default">Cancel</a>  
+          </form>
+          
+        </div>
+        
+        <!-- /.card-body -->
+      </div>
+        <div class="card-body">
+          <div class="card-body-icon">
+          </div>
+          
+      </div>
+      
+    </div>
+    
+  </div>
+  
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Icon Cards-->
+
+  <div id="printable-div">
+  <div class="container">
+    
+    <div class="row justify-content-center">
+      
+      <div class="col-md-12">
+        
+        <div class="section">
+          <h2>Customer Information</h2>
+          <div class="contact-row">
+            <div class="contact-label">Customer No</div>
+            <div class="contact-value">{{order.company}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Order No</div>
+            <div class="contact-value">{{order.order_no}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Order Date</div>
+            <div class="contact-value">{{order.order_date}}</div>
+          </div>
+        </div>
+        <div class="section">
+          <h2>Address Information</h2>
+          <div class="contact-row">
+            <div class="contact-label">Delivery Status</div>
+            <div class="contact-value">{{order.order_delivery_status}}</div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Delivered on</div>
+            <div class="contact-value">{{order.delivered_on}}</div>
+          </div>
+          
+        </div>  
+        
+        </div>
+        
+        
+    </div>
+    
+</div>
+
+<div class="row">
+  
+  <div class="col-xl-12 col-sm-12 mb-12">
+    
+    
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Product List</div>
+        <div class="card mb-3">
+          <div >
+            
+
+            </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Gender</th>
+                <th>Size</th>
+                <th>Color</th>
+                <th>Fabric Description</th>
+                <th>Order No</th>
+                <th>Other Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Contact Person</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for product in products %}
+              <tr>
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.gender }}</td>
+                <td>{{ product.size_chart }}</td>
+                <td>{{ product.color_chart }}</td>
+                <td>{{ product.fabric_description }}</td>
+                <td>{{ product.order_no }}</td>
+                <td>{{ product.other_descriptions }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.unit_price }}</td>
+                <td>{{ product.contact_person }}</td>
+                
+                
+                <td>
+                  <div class="action-btns">
+                   
+                  <a href= "{% url 'product_detail' product.pk %}"> <button class="btn-view"  type=button>View</button></a>
+                  
+                  <a href="{% url 'product_update' product.pk %}"> <button class="btn-edit" type=button>Edit</button></a>
+                  
+                  
+                  <a href="{% url 'product_delete' product.pk %}" ><button class="btn-delete" type=button>Delete</button></a>
+                  
+                  
+                </div>
+              </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="12">No product available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+      <div class="card-body">
+        
+        <div class="card-body-icon">
+        </div>
+    </div>
+  </div>
+</div>
+<form method="post">
+  {% csrf_token%}
+<button class="btn btn-info">Print</button>
+</form>
+<a href="{% url 'order_list' %}" class="btn btn-secondary">Back to List</a>  
+{% endblock %}

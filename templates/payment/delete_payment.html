@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Delete Payment Details</h2>
+  <hr>
+  <p>Are you sure you want to delete the following payment details?</p>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Order No</th>
+        <td>{{ payment.order_no }}</td>
+      </tr>
+      <tr>
+        <th>Invoice No </th>
+        <td>{{payment.invoice_no}}</td>
+      </tr>
+      <tr>
+        <th>Total Price</th>
+        <td>{{ payment.total_price }}</td>
+      </tr>
+      <tr>
+        <th>Payment Status </th>
+        <td>{{ payment.payment_status}}</td>
+      </tr>
+      <tr>
+        <th>Paid On</th>
+        <td>{{ payment.paid_date }}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete">
+    <a href="{% url 'payment_list' %}" class="btn btn-default">Cancel</a>
+  </form>
+{% endblock %}

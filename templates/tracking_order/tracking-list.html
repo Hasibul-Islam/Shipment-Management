@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Icon Cards-->
+
+<div class="row">
+  
+  <div class="col-xl-12 col-sm-12 mb-12">
+    
+    
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        CNF List</div>
+        <div class="card mb-3">
+            
+          <div >
+            
+
+            </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Order No</th>
+                <th>CNF No</th>
+                
+                <th>Shipment No</th>
+                <th>Received Date </th>
+                <th>Ready Date</th>
+                <th>Shipped Date</th>
+                <th>Reached Overseas</th>
+                <th>Delivery Date</th>
+                <th>Payment Date</th>
+                
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for shipment in shipment_trackings %}
+              <tr>
+                <td>{{ shipment.order_no  }}</td>
+                <td>{{ shipment.cnf_no }}</td>
+                
+                <td>{{ shipment.shipment_no  }}</td>
+                
+                <td>{{ shipment.order_received_date  }}</td>
+                <td>{{ shipment.order_ready_date   }}</td>
+                <td>{{ shipment.order_shipped_date  }}</td>
+                <td>{{ shipment.order_reached_overseas_date   }}</td>
+                <td>{{ shipment.order_delivered_date   }}</td>
+                <td>{{ shipment.order_payment_lc_date }}</td>
+                
+                <td>
+                  <div class="action-btns">
+                   
+                  <a href= "{% url 'view_shipment' shipment.pk %}"> <button class="btn-view"  type=button>View</button></a>
+
+                  {% comment %} <a href="{% url 'view_shipment' shipment.shipment_no %}" ><button class="btn btn-info" type=button>Track</button></a> {% endcomment %}
+                  {% comment %} <a href="{% url 'shipment_edit' shipment.pk %}"> <button class="btn-edit" type=button>Edit</button></a> {% endcomment %}
+                  
+                  
+                  {% comment %} <a href="{% url 'shipment_delete' shipment.pk %}" ><button class="btn-delete" type=button>Delete</button></a> {% endcomment %}
+
+                  
+                  
+                </div>
+              </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="12">No tracking details available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+      <div class="card-body">
+        
+        <div class="card-body-icon">
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

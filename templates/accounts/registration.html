@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% for message in messages %}
+<ul>{{message}}</ul>
+{% endfor%}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <select class="selectpicker" name="group_name">
+      <option value="Admin">Admin</option>
+      <option value="Manager">Manager</option>
+      <option value="CNF">CNF</option>
+    </select>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+{% endblock %}

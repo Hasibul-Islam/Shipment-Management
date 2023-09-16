@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <!-- Icon Cards-->
+   
+   <div class="row">
+    <div class="col-xl-12 col-sm-12 mb-12">
+      <div class="card card-warning">
+        <div class="card-header">
+          <h3 class="card-title">CNF Information</h3>
+        </div>
+        <!-- /.card-header -->
+        
+        <div class="card-body">
+          <form method = "post" role="form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label >CNF Information</label>
+                  {{form.cnf_information}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Contact Person</label>
+                  {{form.contact_person}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>City</label>
+                  {{form.city}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Country</label>
+                  {{form.country}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>State</label>
+                  {{form.state}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Street </label>
+                  {{form.street}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Postal Code</label>
+                  {{form.postal_code}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  {{form.email}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>Phone</label>
+                  {{form.phone}}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Best Time to Call</label>
+                  {{form.best_time_to_call}}
+                </div>
+              </div>
+            </div>
+            
+              
+            </div> 
+            <button type="submit" class="btn btn-primary">Submit</button>   
+            <a href="{% url 'shipment_list' %}" class="btn btn-default">Cancel</a>  
+          </form>
+          
+        </div>
+        
+        <!-- /.card-body -->
+      </div>
+        <div class="card-body">
+          <div class="card-body-icon">
+          </div>
+          
+      </div>
+      
+    </div>
+    
+  </div>
+  
+{% endblock %}

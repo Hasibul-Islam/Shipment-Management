@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Icon Cards-->
+
+<div class="row">
+  
+  <div class="col-xl-12 col-sm-12 mb-12">
+    
+    
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        CNF List</div>
+        <div class="card mb-3">
+            <form method="POST" action="{% url 'shipment_create' %}">
+                {% csrf_token %}
+              <button class="btn-view">Add CNF</button>
+          <div >
+            
+
+            </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Order No</th>
+                <th>CNF No</th>
+                
+                <th>Shipment No</th>
+                
+                <th> Actions </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for shipment in shipments %}
+              <tr>
+                <td>{{ shipment.order_no }}</td>
+                <td>{{ shipment.cnf_no }}</td>
+                
+                <td>{{ shipment.shipment_no }}</td>
+                
+                
+                <td>
+                  <div class="action-btns">
+                   
+                  <a href= "{% url 'shipment_report_view' shipment.pk %}"> <button class="btn-view"  type=button>Shipment Report</button></a>
+
+                  <a href= "{% url 'chalan_report_view' shipment.pk %}"> <button class="btn-view"  type=button>Chalan Report</button></a>
+
+                  
+                  
+                </div>
+              </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="12">No company details available.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+      <div class="card-body">
+        
+        <div class="card-body-icon">
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

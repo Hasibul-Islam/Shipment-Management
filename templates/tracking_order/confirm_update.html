@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Update Traking Details</h2>
+  <hr>
+  <p>Are you sure your order {{status}}?</p>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>Shipment Info</th>
+        <td>{{ shipment_tracking.cnf_information }}</td>
+      </tr>
+      <tr>
+        <th>Shipment No</th>
+        <td>{{ shipment_tracking.cnf_no }}</td>
+      </tr>
+      <tr>
+        <th>Order No </th>
+        <td>{{ shipment_tracking.order_no }}</td>
+      </tr>
+      <tr>
+        <th>Contact Person:</th>
+        <td>{{ shipment.contact_person }}</td>
+      </tr>
+      
+      <tr>
+        <th>City:</th>
+        <td>{{ shipment.city }}</td>
+      </tr>
+      <tr>
+        <th>Country:</th>
+        <td>{{ shipment.country }}</td>
+      </tr>
+      <tr>
+        <th>State:</th>
+        <td>{{ shipment.state }}</td>
+      </tr>
+      <tr>
+        <th>Street:</th>
+        <td>{{ shipment.street }}</td>
+      </tr>
+      <tr>
+        <th>Postal Code:</th>
+        <td>{{ shipment.postal_code }}</td>
+      </tr>
+      <tr>
+        <th>Email:</th>
+        <td>{{ shipment.email }}</td>
+      </tr>
+      <tr>
+        <th>Phone:</th>
+        <td>{{ shipment.phone }}</td>
+      </tr>
+      <tr>
+        <th>Best Time to Call:</th>
+        <td>{{ shipment.best_time_to_call }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <form method="post">
+    {% csrf_token %}
+    {% if status and shipment_tracking.reached_overseas %}
+    <label>Unique Code</label>
+    <input type="text" id="code" name="code">
+    {% endif %}
+    {% if status and not shipment_tracking.ready %}
+    <div class="form-outline w-25 mb-4">
+        <textarea class="form-control" id="textAreaExample4" rows="3" name="carton"></textarea>
+        <label class="form-label" for="textAreaExample4">Carton Details</label>
+      </div>
+    {% endif %}
+    {% if status and shipment_tracking.ready and not shipment_tracking.shipped  %}
+    <div class="form-outline w-25 mb-4">
+        <textarea class="form-control" id="textAreaExample4" rows="3" name="container"></textarea>
+        <label class="form-label" for="textAreaExample4">Container Details</label>
+      </div>
+    {% endif %}
+    {% if status %}
+    <input type="submit" class="btn btn-primary" value="Update">
+    {% endif %}
+    <a href="{% url 'view_shipment' shipment_tracking.pk %}" class="btn btn-default">Cancel</a>
+  </form>
+  
+{% endblock %}

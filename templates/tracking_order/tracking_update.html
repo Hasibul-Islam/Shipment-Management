@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Update Shipment Tracking</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="code">Provide the unique code given in the mail:</label>
+    <input type="text" id="code" name="code">
+    <button type="submit">Update</button>
+  </form>
+{% endblock %}
